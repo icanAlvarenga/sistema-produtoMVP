@@ -95,11 +95,11 @@ public class BuscaProdutoView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("jButton2");
+        jButton2.setLabel("Novo");
 
-        jButton3.setText("jButton3");
+        jButton3.setLabel("Visualizar");
 
-        jButton4.setText("jButton4");
+        jButton4.setLabel("Fechar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
