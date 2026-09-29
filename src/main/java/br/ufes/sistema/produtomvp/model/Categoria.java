@@ -23,6 +23,9 @@ public class Categoria {
     public double getPercLucro() {
         return percLucro;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

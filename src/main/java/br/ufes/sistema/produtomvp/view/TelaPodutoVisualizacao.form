@@ -20,15 +20,15 @@
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="224" max="-2" attributes="0"/>
+                  <Component id="btnVisualizarHistoricoPrecos" min="-2" pref="224" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+              <Component id="btnFechar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -39,11 +39,11 @@
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="btnVisualizarHistoricoPrecos" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace pref="69" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFechar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
@@ -66,21 +66,21 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNomeProdutoVisualizacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPrecoProdutoVisualizacao" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
+                      <Component id="lblCategoriaProdutoVisualizacao" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                      <Component id="lblMargemLucroVisualizacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPrecoVendaVisualizacao" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTextField1" max="32767" attributes="0"/>
-                          <Component id="jTextField2" min="-2" pref="190" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="0" pref="416" max="32767" attributes="0"/>
-                          <Component id="jTextField3" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                          <Component id="txtNomeProdutoVisualizacao" max="32767" attributes="0"/>
+                          <Component id="txtPrecoProdutoVisualizacao" min="-2" pref="190" max="-2" attributes="0"/>
+                          <Component id="cmbCategoriaProdutoVisualizacao" alignment="0" pref="416" max="32767" attributes="0"/>
+                          <Component id="txtMargemLucroVisualizacao" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jTextField4" min="-2" pref="190" max="-2" attributes="0"/>
+                      <Component id="txtPrecoVendaVisualizacao" min="-2" pref="190" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="85" max="32767" attributes="0"/>
               </Group>
@@ -91,28 +91,28 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNomeProdutoVisualizacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNomeProdutoVisualizacao" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPrecoProdutoVisualizacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPrecoProdutoVisualizacao" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCategoriaProdutoVisualizacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbCategoriaProdutoVisualizacao" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblMargemLucroVisualizacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtMargemLucroVisualizacao" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPrecoVendaVisualizacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPrecoVendaVisualizacao" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="35" max="32767" attributes="0"/>
               </Group>
@@ -120,39 +120,39 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="lblNomeProdutoVisualizacao">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nome do produto:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="lblPrecoProdutoVisualizacao">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pre&#xe7;o do produto:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="lblCategoriaProdutoVisualizacao">
           <Properties>
             <Property name="text" type="java.lang.String" value="Categoria do produto:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="lblMargemLucroVisualizacao">
           <Properties>
             <Property name="text" type="java.lang.String" value="Margem de lucro (%):"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="lblPrecoVendaVisualizacao">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pre&#xe7;o de venda:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="txtNomeProdutoVisualizacao">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeProdutoVisualizacaoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="txtPrecoProdutoVisualizacao">
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="cmbCategoriaProdutoVisualizacao">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -167,13 +167,22 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="txtMargemLucroVisualizacao">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="txtPrecoVendaVisualizacao">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPrecoVendaVisualizacaoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnVisualizarHistoricoPrecos">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="12" style="0"/>
@@ -181,12 +190,12 @@
         <Property name="text" type="java.lang.String" value="Visualizar hist&#xf3;rico de Pre&#xe7;os"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnEditar">
       <Properties>
         <Property name="text" type="java.lang.String" value="editar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="btnFechar">
       <Properties>
         <Property name="text" type="java.lang.String" value="fechar"/>
       </Properties>

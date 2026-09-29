@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package br.ufes.sistema.produtomvp.view;
 
-/**
- *
- * @author danpe
- */
-public class TelaProdutoInclusaoEdicao extends javax.swing.JFrame {
+package br.ufes.sistema.produtomvp.view;
+import br.ufes.sistema.produtomvp.model.Categoria;
+import javax.swing.JOptionPane;
+import java.util.List;
+
+public class TelaProdutoInclusaoEdicao extends javax.swing.JFrame implements IProdutoInclusaoEdicaoView{
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaProdutoInclusaoEdicao.class.getName());
 
@@ -17,6 +13,9 @@ public class TelaProdutoInclusaoEdicao extends javax.swing.JFrame {
      */
     public TelaProdutoInclusaoEdicao() {
         initComponents();
+        setLocationRelativeTo(null);
+        txtMargemLucro.setEditable(false);
+        txtPrecoVenda.setEditable(false);
     }
 
     /**
@@ -187,10 +186,39 @@ public class TelaProdutoInclusaoEdicao extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new TelaProdutoInclusaoEdicao().setVisible(true));
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    @Override public String getNome() { return txtNomeProduto.getText(); }
+    @Override public String getPrecoCusto() { return txtPrecoCusto.getText(); }
+    @Override public Categoria getCategoriaSelecionada() {
+        return (Categoria) cmbBoxCategoriaProduto.getSelectedItem();
+    }
+
+    @Override public void setTitulo(String titulo) { setTitle(titulo); }
+    @Override public void setNome(String nome) { txtNomeProduto.setText(nome); }
+    @Override public void setPrecoCusto(String valor) { txtPrecoCusto.setText(valor); }
+    @Override public void setCategorias(List<Categoria> categorias) {
+        cmbBoxCategoriaProduto.removeAllItems();
+        categorias.forEach(cmbBoxCategoriaProduto::addItem);
+        cmbBoxCategoriaProduto.setSelectedIndex(-1);
+    }
+    @Override public void setCategoriaSelecionada(Categoria c) { cmbBoxCategoriaProduto.setSelectedItem(c); }
+    @Override public void setMargemLucro(String m) { txtMargemLucro.setText(m); }
+    @Override public void setPrecoVenda(String p) { txtPrecoVenda.setText(p); }
+
+    @Override public void exibirMensagem(String m) {
+        JOptionPane.showMessageDialog(this, m, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+    }
+    @Override public void exibirErro(String m) {
+        JOptionPane.showMessageDialog(this, m, "Atenção", JOptionPane.WARNING_MESSAGE);
+    }
+    @Override public void abrir() { setVisible(true); }
+    @Override public void fechar() { dispose(); }
+
+    @Override public void aoSalvar(Runnable acao) { btnSalvar.addActionListener(e -> acao.run()); }
+    @Override public void aoCancelar(Runnable acao) { btnCancelar.addActionListener(e -> acao.run()); }
+
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> cmbBoxCategoriaProduto;
+    private javax.swing.JComboBox<Categoria> cmbBoxCategoriaProduto;
     private javax.swing.JLabel lblCategoriaProduto;
     private javax.swing.JLabel lblMargemLucro;
     private javax.swing.JLabel lblNomeProduto;
@@ -201,5 +229,4 @@ public class TelaProdutoInclusaoEdicao extends javax.swing.JFrame {
     private javax.swing.JTextField txtNomeProduto;
     private javax.swing.JTextField txtPrecoCusto;
     private javax.swing.JTextField txtPrecoVenda;
-    // End of variables declaration//GEN-END:variables
 }
