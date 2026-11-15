@@ -1,4 +1,3 @@
-
 package br.ufes.sistema.produtomvp.model;
 
 public class Produto {
@@ -20,16 +19,32 @@ public class Produto {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public double getPrecoDeCusto() {
         return precoDeCusto;
     }
-    
+
+    public void setPrecoDeCusto(double precoDeCusto) {
+        this.precoDeCusto = precoDeCusto;
+    }
+
     public Categoria getCategoria() {
         return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public Double getMargemLucroAtual() {
@@ -40,17 +55,7 @@ public class Produto {
         return precoVendaAtual;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public void setPrecoDeCusto(double precoDeCusto) {
-        this.precoDeCusto = precoDeCusto;
-    }
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public void atualizarCalculo(Double margemLucro, double precoVenda){
+    public void atualizarCalculo(Double margemLucro, Double precoVenda) {
         this.margemLucroAtual = margemLucro;
         this.precoVendaAtual = precoVenda;
     }

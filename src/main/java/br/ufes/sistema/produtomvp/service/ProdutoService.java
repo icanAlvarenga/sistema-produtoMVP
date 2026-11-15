@@ -3,17 +3,17 @@ package br.ufes.sistema.produtomvp.service;
 import br.ufes.sistema.produtomvp.exception.ValidacaoException;
 import br.ufes.sistema.produtomvp.model.Categoria;
 import br.ufes.sistema.produtomvp.model.Produto;
-import br.ufes.sistema.produtomvp.repository.CategoriaRepository;
-import br.ufes.sistema.produtomvp.repository.ProdutoRepository;
+import br.ufes.sistema.produtomvp.repository.ICategoriaRepository;
+import br.ufes.sistema.produtomvp.repository.IProdutoRepository;
 
 import java.util.List;
 
 public class ProdutoService {
-    private final ProdutoRepository repository;
-    private final CategoriaRepository categoriaRepository;
+    private final IProdutoRepository repository;
+    private final ICategoriaRepository categoriaRepository;
 
-    public ProdutoService(ProdutoRepository repository,
-                          CategoriaRepository categoriaRepository) {
+    public ProdutoService(IProdutoRepository repository,
+                          ICategoriaRepository categoriaRepository) {
         this.repository = repository;
         this.categoriaRepository = categoriaRepository;
     }
@@ -30,7 +30,6 @@ public class ProdutoService {
         return repository.buscarPorCategoria(categoria);
     }
 
-
     public void incluir(String nome, Double precoCusto, Categoria categoria)
             throws ValidacaoException {
         validar(nome, precoCusto, categoria);
@@ -41,6 +40,9 @@ public class ProdutoService {
 
     public void atualizar(Produto produto, String nome, Double precoCusto, Categoria categoria)
             throws ValidacaoException {
+        if (produto == null) {
+            throw new ValidacaoException("Produto inválido para atualização.");
+        }
         validar(nome, precoCusto, categoria);
         produto.setNome(nome.trim());
         produto.setPrecoDeCusto(precoCusto);
@@ -50,7 +52,7 @@ public class ProdutoService {
 
     private void validar(String nome, Double precoCusto, Categoria categoria)
             throws ValidacaoException {
-        if (nome == null || nome.isBlank()) {
+        if (nome == null || nome.trim().isEmpty()) {
             throw new ValidacaoException("O nome do produto é obrigatório.");
         }
         if (precoCusto == null) {
@@ -59,8 +61,8 @@ public class ProdutoService {
         if (precoCusto <= 0) {
             throw new ValidacaoException("O preço de custo deve ser maior que zero.");
         }
-        if (categoria == null || categoriaRepository.buscarPorId(categoria.getId()).isEmpty()) {
-            throw new ValidacaoException("Selecione uma categoria existente.");
+        if (categoria == null || !categoriaRepository.buscarPorId(categoria.getId()).isPresent()) {
+            throw new ValidacaoException("Categoria do produto é obrigatória e deve corresponder a uma categoria existente no repositório.");
         }
     }
 }

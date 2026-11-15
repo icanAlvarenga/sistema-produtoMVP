@@ -16,15 +16,31 @@ public class ProdutoInclusaoEdicaoPresenter {
     private final Produto produtoEmEdicao;
     private final Runnable aoConcluir;
 
-    public ProdutoInclusaoEdicaoPresenter(IProdutoInclusaoEdicaoView view, ProdutoService produtoService, CategoriaService categoriaService, Produto produtoEmEdicao, Runnable aoConcluir) {
+    public ProdutoInclusaoEdicaoPresenter(IProdutoInclusaoEdicaoView view,
+                                          ProdutoService produtoService,
+                                          CategoriaService categoriaService,
+                                          Produto produtoEmEdicao,
+                                          Runnable aoConcluir) {
         this.view = view;
         this.produtoService = produtoService;
         this.categoriaService = categoriaService;
         this.produtoEmEdicao = produtoEmEdicao;
         this.aoConcluir = aoConcluir;
 
-        view.aoSalvar(this::salvar);
-        view.aoCancelar(this::cancelar);
+        view.aoSalvar(new Runnable() {
+            @Override
+            public void run() {
+                salvar();
+            }
+        });
+
+        view.aoCancelar(new Runnable() {
+            @Override
+            public void run() {
+                cancelar();
+            }
+        });
+
         configurarTela();
     }
 
@@ -33,7 +49,6 @@ public class ProdutoInclusaoEdicaoPresenter {
     }
 
     private void configurarTela() {
-        // lista vem do repositório, nunca fixa na tela
         view.setCategorias(categoriaService.listarTodas());
 
         if (produtoEmEdicao == null) {

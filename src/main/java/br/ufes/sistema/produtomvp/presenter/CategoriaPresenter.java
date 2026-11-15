@@ -1,110 +1,190 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.ufes.sistema.produtomvp.presenter;
 
-/**
- *
- * @author jveli
- */
-
-import br.ufes.sistema.produtomvp.view.CategoriasDeProdutosView;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.table.DefaultTableModel;
+import br.ufes.sistema.produtomvp.exception.ValidacaoException;
+import br.ufes.sistema.produtomvp.model.Categoria;
+import br.ufes.sistema.produtomvp.service.CategoriaService;
+import br.ufes.sistema.produtomvp.util.NumeroUtil;
+import br.ufes.sistema.produtomvp.view.ICategoriasDeProdutosView;
 
 public class CategoriaPresenter {
-    
-    private CategoriasDeProdutosView view;
-    
-    public CategoriaPresenter() {
-        this.view = new CategoriasDeProdutosView();
-        
-        // Remove as linhas em branco padrão da tabela gerada pelo NetBeans
-        DefaultTableModel modelo = (DefaultTableModel) view.getTblCategorias().getModel();
-        modelo.setNumRows(0);
-        
-        estadoInicial();
-        configurarAcoesDosBotoes();
-        
-        this.view.setVisible(true);
+
+    private final ICategoriasDeProdutosView view;
+    private final CategoriaService categoriaService;
+    private boolean modoInclusao = false;
+    private boolean modoEdicao = false;
+    private Categoria categoriaSelecionada = null;
+
+    public CategoriaPresenter(ICategoriasDeProdutosView view, CategoriaService categoriaService) {
+        this.view = view;
+        this.categoriaService = categoriaService;
+
+        configurarAcoes();
     }
-    
-    private void estadoInicial() {
-        view.getTxtCategoria().setEnabled(false);
-        view.getTxtPercentualLucro().setEnabled(false);
-        
-        view.getBtnSalvar().setEnabled(false);
-        view.getBtnCancelar().setEnabled(false);
-        
-        view.getBtnNovo().setEnabled(true);
-        view.getBtnEditar().setEnabled(true); // Ficará para a próxima etapa do trabalho
-        view.getBtnExcluir().setEnabled(true); // Ficará para a próxima etapa do trabalho
-        
-        view.getLblModo().setText("Modo: Visualização");
+
+    public void iniciar() {
+        carregarCategorias();
+        entrarModoVisualizacao();
+        view.abrir();
     }
-    
-    private void configurarAcoesDosBotoes() {
-        // Ação do botão NOVO
-        view.getBtnNovo().addActionListener(new ActionListener() {
+
+    private void configurarAcoes() {
+        view.aoNovo(new Runnable() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                view.getTxtCategoria().setEnabled(true);
-                view.getTxtPercentualLucro().setEnabled(true);
-                view.getTxtCategoria().setText("");
-                view.getTxtPercentualLucro().setText("");
-                
-                view.getBtnSalvar().setEnabled(true);
-                view.getBtnCancelar().setEnabled(true);
-                
-                view.getBtnNovo().setEnabled(false);
-                view.getBtnEditar().setEnabled(false);
-                view.getBtnExcluir().setEnabled(false);
-                
-                view.getLblModo().setText("Modo: Inclusão");
-                view.getTxtCategoria().requestFocus();
+            public void run() {
+                novo();
             }
         });
 
-        // Ação do botão SALVAR
-        view.getBtnSalvar().addActionListener(new ActionListener() {
+        view.aoEditar(new Runnable() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                String categoria = view.getTxtCategoria().getText();
-                String percentual = view.getTxtPercentualLucro().getText();
-                
-                // Adiciona os dados na tabela
-                DefaultTableModel modelo = (DefaultTableModel) view.getTblCategorias().getModel();
-                modelo.addRow(new Object[]{categoria, percentual});
-                
-                // Limpa os campos e volta ao modo de visualização
-                view.getTxtCategoria().setText("");
-                view.getTxtPercentualLucro().setText("");
-                estadoInicial();
+            public void run() {
+                editar();
             }
         });
 
-        // Ação do botão CANCELAR
-        view.getBtnCancelar().addActionListener(new ActionListener() {
+        view.aoExcluir(new Runnable() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                view.getTxtCategoria().setText("");
-                view.getTxtPercentualLucro().setText("");
-                estadoInicial();
+            public void run() {
+                excluir();
             }
         });
-        
-        // Ação do botão FECHAR
-        view.getBtnFechar().addActionListener(new ActionListener() {
+
+        view.aoSalvar(new Runnable() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                view.dispose(); // Fecha a tela
+            public void run() {
+                salvar();
+            }
+        });
+
+        view.aoCancelar(new Runnable() {
+            @Override
+            public void run() {
+                cancelar();
+            }
+        });
+
+        view.aoFechar(new Runnable() {
+            @Override
+            public void run() {
+                fechar();
+            }
+        });
+
+        view.aoSelecionarLinha(new Runnable() {
+            @Override
+            public void run() {
+                selecionarCategoria();
             }
         });
     }
 
-    public static void main(String[] args) {
-        new CategoriaPresenter();
+    private void carregarCategorias() {
+        view.exibirCategorias(categoriaService.listarTodas());
+    }
+
+    private void entrarModoVisualizacao() {
+        modoInclusao = false;
+        modoEdicao = false;
+        view.setModo("Modo: Visualização");
+        view.setCamposHabilitados(false);
+        selecionarCategoria();
+    }
+
+    private void selecionarCategoria() {
+        if (!modoInclusao && !modoEdicao) {
+            Categoria c = view.getCategoriaSelecionada();
+            if (c != null) {
+                categoriaSelecionada = c;
+                view.setNomeCategoria(c.getNome());
+                view.setPercentualLucro(NumeroUtil.formatar(c.getPercLucro()));
+                view.setBotoesModoVisualizacao(true);
+            } else {
+                categoriaSelecionada = null;
+                view.setNomeCategoria("");
+                view.setPercentualLucro("");
+                view.setBotoesModoVisualizacao(false);
+            }
+        }
+    }
+
+    private void novo() {
+        modoInclusao = true;
+        modoEdicao = false;
+        categoriaSelecionada = null;
+        view.setNomeCategoria("");
+        view.setPercentualLucro("");
+        view.setCamposHabilitados(true);
+        view.setBotoesModoEdicaoOuInclusao();
+        view.setModo("Modo: Inclusão");
+        view.focarCampoCategoria();
+    }
+
+    private void editar() {
+        Categoria c = view.getCategoriaSelecionada();
+        if (c == null) {
+            return;
+        }
+        modoInclusao = false;
+        modoEdicao = true;
+        categoriaSelecionada = c;
+        view.setNomeCategoria(c.getNome());
+        view.setPercentualLucro(NumeroUtil.formatar(c.getPercLucro()));
+        view.setCamposHabilitados(true);
+        view.setBotoesModoEdicaoOuInclusao();
+        view.setModo("Modo: Edição");
+        view.focarCampoCategoria();
+    }
+
+    private void salvar() {
+        try {
+            String nome = view.getNomeCategoria();
+            Double percLucro = converterPercentual(view.getPercentualLucro());
+
+            if (modoInclusao) {
+                categoriaService.incluir(nome, percLucro);
+            } else if (modoEdicao && categoriaSelecionada != null) {
+                categoriaService.atualizar(categoriaSelecionada, nome, percLucro);
+            }
+
+            view.exibirMensagem("Item salvo com sucesso!");
+            carregarCategorias();
+            entrarModoVisualizacao();
+        } catch (ValidacaoException e) {
+            view.exibirErro(e.getMessage());
+        }
+    }
+
+    private void cancelar() {
+        entrarModoVisualizacao();
+    }
+
+    private void excluir() {
+        Categoria c = view.getCategoriaSelecionada();
+        if (c == null) {
+            return;
+        }
+
+        if (view.confirmarExclusao("Deseja realmente excluir?")) {
+            try {
+                categoriaService.excluir(c);
+                view.exibirMensagem("Item '" + c.getNome() + "' excluído com sucesso!");
+                carregarCategorias();
+                entrarModoVisualizacao();
+            } catch (ValidacaoException e) {
+                view.exibirErro(e.getMessage());
+            }
+        }
+    }
+
+    private void fechar() {
+        view.fechar();
+    }
+
+    private Double converterPercentual(String texto) throws ValidacaoException {
+        try {
+            return NumeroUtil.parse(texto);
+        } catch (NumberFormatException e) {
+            throw new ValidacaoException("Percentual de lucro inválido. Digite apenas números.");
+        }
     }
 }
